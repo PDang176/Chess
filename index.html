@@ -14,10 +14,10 @@
         <div id="game-view-squares">
             <div
                 v-for="(square, i) in activeGame.squares"
-                v-on:click="activeGame.makeMove(i)"
-                v-bind:class="{highlighted: square.isHighlighted}"
-                class="game-view-square">    
-                {{ square.value }}
+                @click="activeGame.makeMove(i)"
+                class="game-view-square"
+                v-bind:class="{ highlighted: square.isHighlighted }"
+                v-html="square.piece.symbol">
             </div>
         </div>
     </div>
@@ -25,6 +25,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/Square.js"></script>
     <script src="js/Game.js"></script>
+    <script src="js/Piece.js"></script>
+    <script src="js/Pawn.js"></script>
+    <script src="js/Rook.js"></script>
+    <script src="js/Bishop.js"></script>
+    <script src="js/Knight.js"></script>
+    <script src="js/King.js"></script>
+    <script src="js/Queen.js"></script>
     <script>
 
         let activeGame = new Game();

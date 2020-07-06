@@ -1,11 +1,70 @@
 class Rook extends Piece{
     constructor(color){
         super(color);
+        this.symbol = this.setSymbol();
     }
-    possibleMoves(x, y){
+    setSymbol(){
+        return (this.color === 'White') ? '&#9814' : '&#9820';
+    }
+    possibleMoves(board, start){
         var positions = [];
-        for(var i = x; i > 0; i--){
-            
+
+        //Moving Left
+        for(let i = start.x - 1; i > 0; i--){
+            if(board[8 * (start.y - 1) + i - 1].piece.color === ''){
+                positions.push(8 * (start.y - 1) + i - 1);
+            }
+            else if(board[8 * (start.y - 1) + i - 1].piece.color === this.color){
+                break;
+            }
+            else{
+                positions.push(8 * (start.y - 1) + i - 1);
+                break;
+            }
         }
+
+        //Moving Right
+        for(let i = start.x + 1; i < 9; i++){
+            if(board[8 * (start.y - 1) + i - 1].piece.color === ''){
+                positions.push(8 * (start.y - 1) + i - 1);
+            }
+            else if(board[8 * (start.y - 1) + i - 1].piece.color === this.color){
+                break;
+            }
+            else{
+                positions.push(8 * (start.y - 1) + i - 1);
+                break;
+            }
+        }
+
+        //Moving Up
+        for(let i = start.y - 1; i > 0; i--){
+            if(board[8 * (i - 1) + start.x - 1].piece.color === ''){
+                positions.push(8 * (i - 1) + start.x - 1);
+            }
+            else if(board[8 * (i - 1) + start.x - 1].piece.color === this.color){
+                break;
+            }
+            else{
+                positions.push(8 * (i - 1) + start.x - 1);
+                break;
+            }
+        }
+
+        //Moving Down
+        for(let i = start.y + 1; i < 9; i++){
+            if(board[8 * (i - 1) + start.x - 1].piece.color === ''){
+                positions.push(8 * (i - 1) + start.x - 1);
+            }
+            else if(board[8 * (i - 1) + start.x - 1].piece.color === this.color){
+                break;
+            }
+            else{
+                positions.push(8 * (i - 1) + start.x - 1);
+                break;
+            }
+        }
+
+        return positions;
     }
 }

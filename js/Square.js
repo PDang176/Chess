@@ -1,8 +1,8 @@
 class Square{
     constructor(){
-        this.piece = null;
+        this.piece = new Piece('');
         this.isHighlighted = false;
-        this.x;
-        this.y;
+        this.x = null;
+        this.y = null;
     }
 };
