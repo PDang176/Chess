@@ -1,0 +1,128 @@
+#game-view{
+    width: 500px;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+#game-view-info{
+    padding: 15px;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #eee;
+}
+
+#game-view-squares{
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+.game-view-square{
+    width: 12.5%;
+    height: 12.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: cursive;
+    font-size: 75px;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+}
+
+.game-view-square.highlighted{
+    background-color: green;
+}
+
+/* Setting border of board */
+.game-view-square:nth-child(-n + 8){
+    border-top: 5px solid black;
+}
+
+.game-view-square:nth-child(8n + 1){
+    border-left: 5px solid black;
+}
+
+.game-view-square:nth-child(8n){
+    border-right: 5px solid black;
+}
+
+.game-view-square:nth-child(n + 57){
+    border-bottom: 5px solid black;
+}
+
+/* Setting square backgrounds */
+.game-view-square:nth-child(-2n + 8){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(-2n + 7){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 9):nth-child(-2n + 15){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 10):nth-child(-2n + 16){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 18):nth-child(-2n + 24){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 17):nth-child(-2n + 23){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 25):nth-child(-2n + 31){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 26):nth-child(-2n + 32){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 34):nth-child(-2n + 40){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 33):nth-child(-2n + 39){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 41):nth-child(-2n + 47){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 42):nth-child(-2n + 48){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 50):nth-child(-2n + 56){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 49):nth-child(-2n + 55){
+    background-color: white;
+}
+
+.game-view-square:nth-child(n + 57):nth-child(-2n + 63){
+    background-color: grey;
+}
+
+.game-view-square:nth-child(n + 58):nth-child(-2n + 64){
+    background-color: white;
+}
+
+/* Hover effect */
+.game-view-square:hover{
+    background-color: green !important;
+}
