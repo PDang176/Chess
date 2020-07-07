@@ -18,7 +18,6 @@ class Game{
             }
         }
 
-        this.squares[28].piece = new Knight('White');
 
         //Black Pawns
         for(let i = 8; i < 16; i++){
@@ -66,12 +65,18 @@ class Game{
         this.squares[60].piece = new King('White');
     }
     makeMove(i){
-        if(this.squares[i].piece.color === this.currentTurn){
+        if(i === this.currentSelected[0]){
+            for(let j = 0; j < this.currentSelected.length; j++){
+                this.squares[this.currentSelected[j]].isHighlighted = false;
+            }
+            this.currentSelected.splice(0, this.currentSelected.length);
+        }
+        else if(this.squares[i].piece.color === this.currentTurn){
             if(this.currentSelected.length > 0){
                 for(let j = 0; j < this.currentSelected.length; j++){
                     this.squares[this.currentSelected[j]].isHighlighted = false;
                 }
-                this.currentSelected.splice(0, this.currentSelected.length)
+                this.currentSelected.splice(0, this.currentSelected.length);
             }
             this.squares[i].isHighlighted = true;
             this.currentSelected.push(i);
