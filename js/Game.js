@@ -7,6 +7,7 @@ class Game{
         this.currentSelected = [];
         this.initializeBoard();
     }
+
     initializeBoard(){
         //Assign x and y location to squares
         let s = 0;
@@ -64,19 +65,21 @@ class Game{
         //White King
         this.squares[60].piece = new King('White');
     }
-    makeMove(i){
-        if(i === this.currentSelected[0]){
-            for(let j = 0; j < this.currentSelected.length; j++){
-                this.squares[this.currentSelected[j]].isHighlighted = false;
-            }
-            this.currentSelected.splice(0, this.currentSelected.length);
+
+    removeHighlights(){
+        for(let j = 0; j < this.currentSelected.length; j++){
+            this.squares[this.currentSelected[j]].isHighlighted = false;
         }
-        else if(this.squares[i].piece.color === this.currentTurn){
+        this.currentSelected.splice(0, this.currentSelected.length);
+    }
+
+    makeMove(i){
+        if(i === this.currentSelected[0]){ //Clicking already selected piece (deselects)
+           this.removeHighlights();
+        }
+        else if(this.squares[i].piece.color === this.currentTurn){ //Clicking non-selected piece of player's color
             if(this.currentSelected.length > 0){
-                for(let j = 0; j < this.currentSelected.length; j++){
-                    this.squares[this.currentSelected[j]].isHighlighted = false;
-                }
-                this.currentSelected.splice(0, this.currentSelected.length);
+                this.removeHighlights();
             }
             this.squares[i].isHighlighted = true;
             this.currentSelected.push(i);
@@ -85,6 +88,12 @@ class Game{
                 this.squares[availableMoves[j]].isHighlighted = true;
                 this.currentSelected.push(availableMoves[j]);
             }
+        }
+        else if(this.squares[i].isHighlighted === true){ //Clicking available movement option for selected piece
+            this.squares[i].piece = this.squares[this.currentSelected[0]].piece;
+            this.squares[this.currentSelected[0]].piece = new Piece('');
+            this.removeHighlights();
+            this.currentTurn = (this.currentTurn === Game.white) ? Game.black : Game.white;
         }
     }
 }
