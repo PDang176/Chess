@@ -15,6 +15,7 @@ class Game{
             for(let j = 1; j < 9; j++){
                 this.squares[s].x = j;
                 this.squares[s].y = i;
+                this.squares[s].index = s;
                 s++;
             }
         }
