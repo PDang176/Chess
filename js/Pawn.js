@@ -10,6 +10,9 @@ class Pawn extends Piece{
         var positions = [];
         
         if(this.color === 'White'){
+            if(start.y === 7 && board[8 * (start.y - 3) + start.x - 1].piece.color === ''){
+                positions.push(8 * (start.y - 3) + start.x - 1);
+            }
             if(start.y - 1 > 0 && board[8 * (start.y - 2) + start.x - 1].piece.color === ''){
                 positions.push(8 * (start.y - 2) + start.x - 1);
             }
@@ -21,6 +24,9 @@ class Pawn extends Piece{
             }
         }
         else{
+            if(start.y === 2 && board[8 * (start.y + 1) + start.x - 1].piece.color === ''){
+                positions.push(8 * (start.y + 1) + start.x - 1);
+            }
             if(start.y + 1 < 9 && board[8 * (start.y) + start.x - 1].piece.color === ''){
                 positions.push(8 * (start.y) + start.x - 1);
             }
