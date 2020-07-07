@@ -67,10 +67,27 @@ class Game{
     }
 
     removeHighlights(){
-        for(let j = 0; j < this.currentSelected.length; j++){
-            this.squares[this.currentSelected[j]].isHighlighted = false;
+        for(let i = 0; i < this.currentSelected.length; i++){
+            this.squares[this.currentSelected[i]].isHighlighted = false;
         }
         this.currentSelected.splice(0, this.currentSelected.length);
+    }
+
+    removeEnPassant(){
+        if(this.currentTurn === Game.white){
+            for(let i = 24; i < 32; i++){
+                if(this.squares[i].piece.symbol === '&#9823'){
+                    this.squares[i].piece.enPassant = false;
+                }
+            }
+        }
+        else{
+            for(let i = 32; i < 40; i++){
+                if(this.squares[i].piece.symbol === '&#9817'){
+                    this.squares[i].piece.enPassant = false;
+                }
+            }
+        }
     }
 
     makeMove(i){
@@ -90,9 +107,34 @@ class Game{
             }
         }
         else if(this.squares[i].isHighlighted === true){ //Clicking available movement option for selected piece
+            if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ // White pawn
+                if(this.squares[i].y === this.squares[this.currentSelected[0]].y - 2){
+                    this.squares[this.currentSelected[0]].piece.enPassant = true;
+                }
+            }
+            else if(this.squares[this.currentSelected[0]].piece.symbol === '&#9823'){ // Black pawn
+                if(this.squares[i].y === this.squares[this.currentSelected[0]].y + 2){
+                    this.squares[this.currentSelected[0]].piece.enPassant = true;
+                }
+            }
+            if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ //En Passant White
+                if(this.squares[this.currentSelected[0]].y === 4){
+                    if(this.squares[i + 8].piece.symbol === '&#9823'){
+                        this.squares[i + 8].piece = new Piece('');
+                    }
+                }
+            }
+            else if(this.squares[this.currentSelected[0]].piece.symbol === '&#9823'){ //En Passant Black
+                if(this.squares[this.currentSelected[0]].y === 5){
+                    if(this.squares[i - 8].piece.symbol === '&#9817'){
+                        this.squares[i - 8].piece = new Piece('');
+                    }
+                }
+            }
             this.squares[i].piece = this.squares[this.currentSelected[0]].piece;
             this.squares[this.currentSelected[0]].piece = new Piece('');
             this.removeHighlights();
+            this.removeEnPassant();
             this.currentTurn = (this.currentTurn === Game.white) ? Game.black : Game.white;
         }
     }
