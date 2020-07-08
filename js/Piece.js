@@ -33,6 +33,7 @@ class Piece{
         if(kingLoc != -1 && board[kingLoc].inCheck(board, this.color)){
             return true;
         }
+        return false;
     }
 
     createTempBoard(board, start, end){
