@@ -82,6 +82,46 @@ class King extends Piece{
             }
         }
 
+        //Castle King Side
+        if(!search && !board[start.index].inCheck(board, this.color) && this.castleKingSide(board, start)){
+            positions.push(start.index + 2);
+        }
+
+        //Castle Queen Side
+        if(!search && !board[start.index].inCheck(board, this.color) && this.castleQueenSide(board, start)){
+            positions.push(start.index - 2);
+        }
+
         return positions;
+    }
+
+    castleKingSide(board, start){
+        if(this.canCastle){
+            if(board[start.index + 3].piece.symbol === '&#9814' || board[start.index + 3].piece.symbol === '&#9820'){
+                if(board[start.index + 3].piece.canCastle){
+                    for(let i = 1; i < 3; i++){
+                        if(board[start.index + i].piece.symbol !== '' || board[start.index + i].inCheck(board, this.color)){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
+    }
+
+    castleQueenSide(board, start){
+        if(this.canCastle){
+            if(board[start.index - 4].piece.symbol === '&#9814' || board[start.index - 4].piece.symbol === '&#9820'){
+                if(board[start.index - 4].piece.canCastle){
+                    for(let i = 1; i < 4; i++){
+                        if(board[start.index - i].piece.symbol !== '' || board[start.index - i].inCheck(board, this.color)){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
     }
 }

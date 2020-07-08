@@ -2,6 +2,7 @@ class Rook extends Piece{
     constructor(color){
         super(color);
         this.symbol = this.setSymbol();
+        this.canCastle = true;
     }
     setSymbol(){
         return (this.color === 'White') ? '&#9814' : '&#9820';

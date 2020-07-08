@@ -132,6 +132,27 @@ class Game{
                         }
                     }
                 }
+                if(this.squares[this.currentSelected[0]].piece.symbol === '&#9812' 
+                || this.squares[this.currentSelected[0]].piece.symbol === '&#9818'
+                || this.squares[this.currentSelected[0]].piece.symbol === '&#9814' 
+                || this.squares[this.currentSelected[0]].piece.symbol === '&#9820'){ //Castle Rights Revoked
+                    if(this.squares[this.currentSelected[0]].piece.canCastle){
+                        this.squares[this.currentSelected[0]].piece.canCastle = false;
+                    }
+                }
+                if(this.squares[this.currentSelected[0]].piece.symbol === '&#9812' 
+                || this.squares[this.currentSelected[0]].piece.symbol === '&#9818'){ //Castling move rook position
+                    if(this.currentSelected[0] === i - 2){
+                        this.squares[i - 1].piece = this.squares[i + 1].piece; //Moving rook
+                        this.squares[i - 1].piece.canCastle = false;
+                        this.squares[i + 1].piece = new Piece('');
+                    }
+                    else if(this.currentSelected[0] === i + 2){
+                        this.squares[i + 1].piece = this.squares[i - 2].piece; //Moving rook
+                        this.squares[i + 1].piece.canCastle = false;
+                        this.squares[i - 2].piece = new Piece('');
+                    }
+                }
                 this.squares[i].piece = this.squares[this.currentSelected[0]].piece;
                 this.squares[this.currentSelected[0]].piece = new Piece('');
                 this.removeHighlights();
