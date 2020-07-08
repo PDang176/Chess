@@ -12,65 +12,49 @@ class Rook extends Piece{
 
         //Moving Left
         for(let i = start.x - 1; i > 0; i--){
-            if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (start.y - 1) + i - 1))){
-                if(board[8 * (start.y - 1) + i - 1].piece.color === ''){
+            if(board[8 * (start.y - 1) + i - 1].piece.color !== this.color){
+                if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (start.y - 1) + i - 1))){
                     positions.push(8 * (start.y - 1) + i - 1);
                 }
-                else if(board[8 * (start.y - 1) + i - 1].piece.color === this.color){
-                    break;
-                }
-                else{
-                    positions.push(8 * (start.y - 1) + i - 1);
-                    break;
-                }
+            }
+            else{
+                break;
             }
         }
 
         //Moving Right
         for(let i = start.x + 1; i < 9; i++){
-            if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (start.y - 1) + i - 1))){
-                if(board[8 * (start.y - 1) + i - 1].piece.color === ''){
+            if(board[8 * (start.y - 1) + i - 1].piece.color !== this.color){
+                if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (start.y - 1) + i - 1))){
                     positions.push(8 * (start.y - 1) + i - 1);
                 }
-                else if(board[8 * (start.y - 1) + i - 1].piece.color === this.color){
-                    break;
-                }
-                else{
-                    positions.push(8 * (start.y - 1) + i - 1);
-                    break;
-                }
+            }
+            else{
+                break;
             }
         }
 
         //Moving Up
         for(let i = start.y - 1; i > 0; i--){
-            if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (i - 1) + start.x - 1))){
-                if(board[8 * (i - 1) + start.x - 1].piece.color === ''){
+            if(board[8 * (i - 1) + start.x - 1].piece.color !== this.color){
+                if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (i - 1) + start.x - 1))){
                     positions.push(8 * (i - 1) + start.x - 1);
                 }
-                else if(board[8 * (i - 1) + start.x - 1].piece.color === this.color){
-                    break;
-                }
-                else{
-                    positions.push(8 * (i - 1) + start.x - 1);
-                    break;
-                }
+            }
+            else{
+                break;
             }
         }
 
         //Moving Down
         for(let i = start.y + 1; i < 9; i++){
-            if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (i - 1) + start.x - 1))){
-                if(board[8 * (i - 1) + start.x - 1].piece.color === ''){
+            if(board[8 * (i - 1) + start.x - 1].piece.color !== this.color){
+                if(search || !this.kingInCheck(this.createTempBoard(board, start.index, 8 * (i - 1) + start.x - 1))){
                     positions.push(8 * (i - 1) + start.x - 1);
                 }
-                else if(board[8 * (i - 1) + start.x - 1].piece.color === this.color){
-                    break;
-                }
-                else{
-                    positions.push(8 * (i - 1) + start.x - 1);
-                    break;
-                }
+            }
+            else{
+                break;
             }
         }
 
