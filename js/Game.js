@@ -101,7 +101,7 @@ class Game{
             }
             this.squares[i].isHighlighted = true;
             this.currentSelected.push(i);
-            let availableMoves = this.squares[i].piece.possibleMoves(this.squares, this.squares[i]);
+            let availableMoves = this.squares[i].piece.possibleMoves(this.squares, this.squares[i], false);
             for(let j = 0; j < availableMoves.length; j++){
                 this.squares[availableMoves[j]].isHighlighted = true;
                 this.currentSelected.push(availableMoves[j]);

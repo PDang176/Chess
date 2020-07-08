@@ -125,5 +125,5 @@
 
 /* Hover effect */
 .game-view-square:hover{
-    background-color: green !important;
+    border: 3px solid pink;
 }

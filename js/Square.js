@@ -21,7 +21,7 @@ class Square{
                     }
                 }
                 else{
-                    let positions = board[i].piece.possibleMoves(board, board[i])
+                    let positions = board[i].piece.possibleMoves(board, board[i], true)
                     for(let j = 0; j < positions.length; j++){
                         if(positions[j] === this.index){
                             return true;
