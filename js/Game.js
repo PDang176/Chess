@@ -109,13 +109,19 @@ class Game{
             }
             else if(this.squares[i].isHighlighted === true){ //Clicking available movement option for selected piece
                 if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ // White pawn
-                    if(this.squares[i].y === this.squares[this.currentSelected[0]].y - 2){
+                    if(this.squares[i].y === this.squares[this.currentSelected[0]].y - 2){ //Setting en Passant
                         this.squares[this.currentSelected[0]].piece.enPassant = true;
+                    }
+                    else if(this.squares[i].y === 1){ //Queen Promotion
+                        this.squares[this.currentSelected[0]].piece = new Queen('White');
                     }
                 }
                 else if(this.squares[this.currentSelected[0]].piece.symbol === '&#9823'){ // Black pawn
-                    if(this.squares[i].y === this.squares[this.currentSelected[0]].y + 2){
+                    if(this.squares[i].y === this.squares[this.currentSelected[0]].y + 2){ //Setting en Passant
                         this.squares[this.currentSelected[0]].piece.enPassant = true;
+                    }
+                    else if(this.squares[i].y === 8){ //Queen Promotion
+                        this.squares[this.currentSelected[0]].piece = new Queen('Black');
                     }
                 }
                 if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ //En Passant White
