@@ -7,17 +7,31 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <div id="game-view">
-        <div id="game-view-info">
-            {{ infoMessage }}
+    <div id="game">
+        <div id="game-view">
+            <div id="game-view-info">
+                {{ infoMessage }}
+            </div>
+            <div id="game-view-squares">
+                <div
+                    v-for="(square, i) in activeGame.squares"
+                    @click="activeGame.makeMove(i)"
+                    class="game-view-square"
+                    v-bind:class="{ highlighted: square.isHighlighted }"
+                    v-html="square.piece.symbol">
+                </div>
+            </div>
         </div>
-        <div id="game-view-squares">
-            <div
-                v-for="(square, i) in activeGame.squares"
-                @click="activeGame.makeMove(i)"
-                class="game-view-square"
-                v-bind:class="{ highlighted: square.isHighlighted }"
-                v-html="square.piece.symbol">
+        <div id="game-moves">
+            <div id="game-moves-info">
+                {{ msg }}
+            </div>
+            <div id="game-moves-made">
+                <div 
+                    v-for="(moves, i) in activeGame.movesMade"
+                    class="game-move-made">
+                    {{ i + 1 }}) {{moves}}
+                </div>
             </div>
         </div>
     </div>
@@ -38,11 +52,12 @@
         let activeGame = new Game();
 
         let gameView = new Vue({
-            el: '#game-view',
+            el: '#game',
             data: {
-                activeGame
+                activeGame,
+                msg: 'Moves Made'
             },
-            computed:{
+            computed: {
                 infoMessage: function(){
                     if(activeGame.inProgress){
                         return "It is " + activeGame.currentTurn + "\'s turn!";

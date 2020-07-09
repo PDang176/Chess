@@ -1,6 +1,12 @@
+#game{
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    width: 800px;
+}
+
 #game-view{
     width: 500px;
-    margin: 0 auto;
     border: 1px solid #000;
 }
 
@@ -126,4 +132,20 @@
 /* Hover effect */
 .game-view-square:hover{
     border: 3px solid pink;
+}
+
+/* Game Moves */
+#game-moves{
+    width: 300px;
+    border: solid black;
+    border-width: 1px 1px 1px 0px;
+}
+
+#game-moves-info{
+    padding: 15px;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #eee;
 }

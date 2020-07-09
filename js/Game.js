@@ -5,6 +5,7 @@ class Game{
         this.currentTurn = Game.white;
         this.squares = new Array(64).fill().map(s => new Square());
         this.currentSelected = [];
+        this.movesMade = [];
         this.initializeBoard();
     }
 
@@ -159,6 +160,12 @@ class Game{
                         this.squares[i - 2].piece = new Piece('');
                     }
                 }
+                if(this.currentTurn === Game.white){
+                    this.movesMade.push(this.moveMade(this.squares[this.currentSelected[0]], this.squares[i], false));
+                }
+                else{
+                    this.movesMade[this.movesMade.length - 1] += ' ' + this.moveMade(this.squares[this.currentSelected[0]], this.squares[i], false);
+                }
                 this.squares[i].piece = this.squares[this.currentSelected[0]].piece;
                 this.squares[this.currentSelected[0]].piece = new Piece('');
                 this.removeHighlights();
@@ -177,6 +184,34 @@ class Game{
                 }
             }
         }
+    }
+
+    moveMade(start, end, pieceCaptured){
+        let movement = ''; //Pawn is default
+
+        if(start.piece.symbol === '&#9816' || start.piece.symbol === '&#9822'){ //Knight
+            movement += 'N';
+        }
+        else if(start.piece.symbol === '&#9814' || start.piece.symbol === '&#9820'){ //Rook
+            movement += 'R';
+        }
+        else if(start.piece.symbol === '&#9815' || start.piece.symbol === '&#9821'){ //Bishop
+            movement += 'B';
+        }  
+        else if(start.piece.symbol === '&#9813' || start.piece.symbol === '&#9819'){ //Queen
+            movement += 'Q';
+        }
+        else if(start.piece.symbol === '&#9812' || start.piece.symbol === '&#9818'){ //King
+            movement += 'K';
+        }
+
+        if(pieceCaptured){
+            movement += 'x'
+        }
+
+        movement += String.fromCharCode('a'.charCodeAt(0) + end.x - 1) + Math.abs(end.y - 9);
+
+        return movement;
     }
 
     checkWinner(){
