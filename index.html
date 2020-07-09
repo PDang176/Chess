@@ -53,6 +53,9 @@
                     <button class="promotion-option" @click="activeGame.pawnPromotion('Bishop')">&#9815</button>
                 </div>
             </div>
+            <div v-else id="new-game">
+                <button class="new-game-button" @click="activeGame.newGame()">New Game</button>
+            </div>
         </div>
     </div>
 

@@ -1,14 +1,6 @@
 class Game{
     constructor(){
-        this.inProgress = true;
-        this.winner = null; // 'Black' or 'White'
-        this.currentTurn = Game.white;
-        this.squares = new Array(64).fill().map(s => new Square());
-        this.currentSelected = [];
-        this.movesMade = [];
-        this.promotion = false;
-        this.promotedPiece = -1;
-        this.initializeBoard();
+        this.newGame();
     }
 
     initializeBoard(){
@@ -312,6 +304,18 @@ class Game{
             return true;
         }
         return false;
+    }
+
+    newGame(){
+        this.inProgress = true;
+        this.winner = null; // 'Black' or 'White'
+        this.currentTurn = Game.white;
+        this.squares = new Array(64).fill().map(s => new Square());
+        this.currentSelected = [];
+        this.movesMade = [];
+        this.promotion = false;
+        this.promotedPiece = -1;
+        this.initializeBoard();
     }
 }
 
