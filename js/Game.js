@@ -6,6 +6,8 @@ class Game{
         this.squares = new Array(64).fill().map(s => new Square());
         this.currentSelected = [];
         this.movesMade = [];
+        this.promotion = false;
+        this.promotedPiece = -1;
         this.initializeBoard();
     }
 
@@ -23,48 +25,48 @@ class Game{
 
         //Black Pawns
         for(let i = 8; i < 16; i++){
-            this.squares[i].piece = new Pawn('Black');
+            this.squares[i].piece = new Pawn(Game.black);
         }
 
         //White Pawns
         for(let i = 48; i < 56; i++){
-            this.squares[i].piece = new Pawn('White');
+            this.squares[i].piece = new Pawn(Game.white);
         }
 
         //Black Rooks
-        this.squares[0].piece = new Rook('Black');
-        this.squares[7].piece = new Rook('Black');
+        this.squares[0].piece = new Rook(Game.black);
+        this.squares[7].piece = new Rook(Game.black);
 
         //White Rooks
-        this.squares[56].piece = new Rook('White');
-        this.squares[63].piece = new Rook('White');
+        this.squares[56].piece = new Rook(Game.white);
+        this.squares[63].piece = new Rook(Game.white);
 
         //Black Knights
-        this.squares[1].piece = new Knight('Black');
-        this.squares[6].piece = new Knight('Black');
+        this.squares[1].piece = new Knight(Game.black);
+        this.squares[6].piece = new Knight(Game.black);
         //White Knights
-        this.squares[57].piece = new Knight('White');
-        this.squares[62].piece = new Knight('White');
+        this.squares[57].piece = new Knight(Game.white);
+        this.squares[62].piece = new Knight(Game.white);
 
         //Black Bishops
-        this.squares[2].piece = new Bishop('Black');
-        this.squares[5].piece = new Bishop('Black');
+        this.squares[2].piece = new Bishop(Game.black);
+        this.squares[5].piece = new Bishop(Game.black);
 
         //White Bishops
-        this.squares[58].piece = new Bishop('White');
-        this.squares[61].piece = new Bishop('White');
+        this.squares[58].piece = new Bishop(Game.white);
+        this.squares[61].piece = new Bishop(Game.white);
 
         //Black Queen
-        this.squares[3].piece = new Queen('Black');
+        this.squares[3].piece = new Queen(Game.black);
 
         //White Queen
-        this.squares[59].piece = new Queen('White');
+        this.squares[59].piece = new Queen(Game.white);
 
         //Black King
-        this.squares[4].piece = new King('Black');
+        this.squares[4].piece = new King(Game.black);
 
         //White King
-        this.squares[60].piece = new King('White');
+        this.squares[60].piece = new King(Game.white);
     }
 
     removeHighlights(){
@@ -92,7 +94,7 @@ class Game{
     }
 
     makeMove(i){
-        if(this.inProgress){
+        if(this.inProgress && !this.promotion){
             if(i === this.currentSelected[0]){ //Clicking already selected piece (deselects)
                 this.removeHighlights();
             }
@@ -115,15 +117,18 @@ class Game{
                         this.squares[this.currentSelected[0]].piece.enPassant = true;
                     }
                     else if(this.squares[i].y === 1){ //Queen Promotion
-                        this.squares[this.currentSelected[0]].piece = new Queen('White');
+                        this.promotion = true;
+                        this.promotedPiece = i;
                     }
+
                 }
                 else if(this.squares[this.currentSelected[0]].piece.symbol === '&#9823'){ // Black pawn
                     if(this.squares[i].y === this.squares[this.currentSelected[0]].y + 2){ //Setting en Passant
                         this.squares[this.currentSelected[0]].piece.enPassant = true;
                     }
                     else if(this.squares[i].y === 8){ //Queen Promotion
-                        this.squares[this.currentSelected[0]].piece = new Queen('Black');
+                        this.promotion = true;
+                        this.promotedPiece = i;
                     }
                 }
                 if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ //En Passant White
@@ -179,6 +184,7 @@ class Game{
                 this.squares[this.currentSelected[0]].piece = new Piece('');
                 this.removeHighlights();
                 this.removeEnPassant();
+
                 this.currentTurn = (this.currentTurn === Game.white) ? Game.black : Game.white;
                 if(this.checkWinner() === "Stalemate"){
                     this.inProgress = false;
@@ -193,6 +199,40 @@ class Game{
                 }
             }
         }
+    }
+
+    pawnPromotion(newPiece){
+        if(this.currentTurn === Game.white){
+            if(newPiece === 'Queen'){
+                this.squares[this.promotedPiece].piece = new Queen(Game.black);
+            }
+            else if(newPiece === 'Knight'){
+                this.squares[this.promotedPiece].piece = new Knight(Game.black);
+            }
+            else if(newPiece === 'Rook'){
+                this.squares[this.promotedPiece].piece = new Rook(Game.black);
+            }
+            else if(newPiece === 'Bishop'){
+                this.squares[this.promotedPiece].piece = new Bishop(Game.black);
+            }
+        }
+        else{
+            if(newPiece === 'Queen'){
+                this.squares[this.promotedPiece].piece = new Queen(Game.white);
+            }
+            else if(newPiece === 'Knight'){
+                this.squares[this.promotedPiece].piece = new Knight(Game.white);
+            }
+            else if(newPiece === 'Rook'){
+                this.squares[this.promotedPiece].piece = new Rook(Game.white);
+            }
+            else if(newPiece === 'Bishop'){
+                this.squares[this.promotedPiece].piece = new Bishop(Game.white);
+            }
+        }
+
+        this.promotion = false;
+        this.promotedPiece = -1;
     }
 
     moveMade(start, end, pieceCaptured){

@@ -40,7 +40,6 @@
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
-    
 }
 
 .game-view-square.highlighted{
@@ -148,4 +147,35 @@
     font-weight: bold;
     text-align: center;
     background-color: #eee;
+}
+
+#game-moves-made{
+    height: 425px;
+}
+
+#pawn-promotion-black{
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+#pawn-promotion-white{
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.promotion-option{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: cursive;
+    font-size: 50px;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
 }

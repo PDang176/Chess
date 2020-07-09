@@ -30,7 +30,27 @@
                 <div 
                     v-for="(moves, i) in activeGame.movesMade"
                     class="game-move-made">
-                    {{ i + 1 }}) {{moves}}
+                    {{ i + 1 }}) {{ moves }}
+                </div>
+            </div>
+            <div
+                v-if="activeGame.promotion"
+                id="pawn-promotion">
+                <div
+                    v-if="activeGame.squares[activeGame.promotedPiece].piece.color === 'Black'"
+                    id="pawn-promotion-black">
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Queen')">&#9819</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Knight')">&#9822</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Rook')">&#9820</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Bishop')">&#9821</button>
+                </div>
+                <div 
+                    v-if="activeGame.squares[activeGame.promotedPiece].piece.color === 'White'"
+                    id="pawn-promotion-white">
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Queen')">&#9813</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Knight')">&#9816</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Rook')">&#9814</button>
+                    <button class="promotion-option" @click="activeGame.pawnPromotion('Bishop')">&#9815</button>
                 </div>
             </div>
         </div>
