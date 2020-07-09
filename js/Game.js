@@ -109,6 +109,7 @@ class Game{
                 }
             }
             else if(this.squares[i].isHighlighted === true){ //Clicking available movement option for selected piece
+                let pieceCaptured = false;
                 if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ // White pawn
                     if(this.squares[i].y === this.squares[this.currentSelected[0]].y - 2){ //Setting en Passant
                         this.squares[this.currentSelected[0]].piece.enPassant = true;
@@ -128,6 +129,7 @@ class Game{
                 if(this.squares[this.currentSelected[0]].piece.symbol === '&#9817'){ //En Passant White
                     if(this.squares[this.currentSelected[0]].y === 4){
                         if(this.squares[i + 8].piece.symbol === '&#9823'){
+                            pieceCaptured = true;
                             this.squares[i + 8].piece = new Piece('');
                         }
                     }
@@ -135,6 +137,7 @@ class Game{
                 else if(this.squares[this.currentSelected[0]].piece.symbol === '&#9823'){ //En Passant Black
                     if(this.squares[this.currentSelected[0]].y === 5){
                         if(this.squares[i - 8].piece.symbol === '&#9817'){
+                            pieceCaptured = true;
                             this.squares[i - 8].piece = new Piece('');
                         }
                     }
@@ -160,10 +163,16 @@ class Game{
                         this.squares[i - 2].piece = new Piece('');
                     }
                 }
-                if(this.currentTurn === Game.white){
-                    this.movesMade.push(this.moveMade(this.squares[this.currentSelected[0]], this.squares[i], false));
+                if(this.currentTurn === Game.white){ //Updating moves made white
+                    if(this.squares[i].piece.symbol !== ''){
+                        pieceCaptured = true;
+                    }
+                    this.movesMade.push(this.moveMade(this.squares[this.currentSelected[0]], this.squares[i], pieceCaptured));
                 }
-                else{
+                else{ //Updating moves made black
+                    if(this.squares[i].piece.symbol !== ''){
+                        pieceCaptured = true;
+                    }
                     this.movesMade[this.movesMade.length - 1] += ' ' + this.moveMade(this.squares[this.currentSelected[0]], this.squares[i], false);
                 }
                 this.squares[i].piece = this.squares[this.currentSelected[0]].piece;
@@ -206,6 +215,9 @@ class Game{
         }
 
         if(pieceCaptured){
+            if(start.piece.symbol === '&#9817' || start.piece.symbol === '&#9823'){ //Pawn
+                movement += String.fromCharCode('a'.charCodeAt(0) + start.x - 1);
+            }
             movement += 'x'
         }
 
