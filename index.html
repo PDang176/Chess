@@ -82,13 +82,16 @@
             },
             computed: {
                 infoMessage: function(){
-                    if(activeGame.inProgress){
+                    if(activeGame.inProgress && !activeGame.kingInCheck()){
                         return "It is " + activeGame.currentTurn + "\'s turn!";
                     }
-                    if(activeGame.winner){
+                    else if(activeGame.inProgress && activeGame.kingInCheck()){
+                        return "It is " + activeGame.currentTurn + "\'s turn! (In Check!)";
+                    }
+                    else if(activeGame.winner){
                         return activeGame.winner + " wins!";
                     }
-                    if(!activeGame.winner && !activeGame.inProgress){
+                    else if(!activeGame.winner && !activeGame.inProgress){
                         return "Stalemate!";
                     }
                 }
