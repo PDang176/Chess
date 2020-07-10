@@ -89,7 +89,7 @@
                         return "It is " + activeGame.currentTurn + "\'s turn! (In Check!)";
                     }
                     else if(activeGame.winner){
-                        return activeGame.winner + " wins!";
+                        return "Checkmate! " + activeGame.winner + " wins!";
                     }
                     else if(!activeGame.winner && !activeGame.inProgress){
                         return "Stalemate!";
