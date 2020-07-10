@@ -34,3 +34,14 @@ Game hosted on https://pdang176.github.io/Chess/
 **Checkmate:**
 - If a player can simply not move due to their king being attacked with no option to protect against the attack then they are Checkmated
 
+**Special Rules:**
+- Castling
+  + Requirements
+    x If the rook the king wants to castle to has not moved
+    x If the king has not moved
+  + If the requirements have been met the king can move two steps towards the rook and put the rook directly next to the king on the opposite side
+- En Passant
+  + Requirements
+    x Turn directly after an enemy pawn double stepped
+    x Player's pawn able to capture enemy pawn as if it had single stepped instead
+  + If the requirements have been met the pawn can move as if the enemy pawn single stepped and capture it
