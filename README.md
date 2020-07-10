@@ -2,7 +2,7 @@
  
 Game hosted on https://pdang176.github.io/Chess/
 
-# How to play:
+## How to play:
 - Clicking on a piece will select it and provide movement options
 - Clicking on highlighted options will move selected piece to the new square
 
