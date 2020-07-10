@@ -9,7 +9,7 @@ Game hosted on https://pdang176.github.io/Chess/
 **Pawn:**
 - Moves one step forward
 - Can move two steps starting from its initial square
-  + Moving two steps makes the pawn susceptible to enpassant
+  - Moving two steps makes the pawn susceptible to enpassant
 - Captures a piece one step diagonally in front of it
 
 **Knight:**
@@ -36,12 +36,12 @@ Game hosted on https://pdang176.github.io/Chess/
 
 **Special Rules:**
 - Castling
-  + Requirements
-    x If the rook the king wants to castle to has not moved
-    x If the king has not moved
-  + If the requirements have been met the king can move two steps towards the rook and put the rook directly next to the king on the opposite side
+  - Requirements
+    - If the rook the king wants to castle to has not moved
+    - If the king has not moved
+  - If the requirements have been met the king can move two steps towards the rook and put the rook directly next to the king on the opposite side
 - En Passant
-  + Requirements
-    x Turn directly after an enemy pawn double stepped
-    x Player's pawn able to capture enemy pawn as if it had single stepped instead
-  + If the requirements have been met the pawn can move as if the enemy pawn single stepped and capture it
+  - Requirements
+    - Turn directly after an enemy pawn double stepped
+    - Player's pawn able to capture enemy pawn as if it had single stepped instead
+  - If the requirements have been met the pawn can move as if the enemy pawn single stepped and capture it
